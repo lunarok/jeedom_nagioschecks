@@ -217,6 +217,8 @@ class nagioschecks extends eqLogic {
       $checkList = $checkList . '<p>' . $div . $cmd->getName() . ' : ' . $text . '</div></p>';
     }
 
+    $replace['#checks#'] = $checkList;
+
         $html = template_replace($replace, getTemplate('core', $_version, 'nagioschecks', 'nagioschecks'));
         return $html;
     }
