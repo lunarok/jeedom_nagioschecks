@@ -20,6 +20,9 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class nagioschecks extends eqLogic {
+
+  public static $_widgetPossibility = array('custom' => true);
+
   public static function dependancy_info() {
     $return = array();
     $return['log'] = 'nagios_plugins';
@@ -50,13 +53,6 @@ class nagioschecks extends eqLogic {
         $alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
         if ($nagioschecks->getIsEnable()) {
     			$nagioschecks->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'5',$alert);
-          $mc = cache::byKey('nagioschecksWidgetdashboard' . $nagioschecks->getId());
-          $mc->remove();
-          $nagioschecks->toHtml('dashboard');
-          $mc = cache::byKey('nagioschecksWidgetmobile' . $nagioschecks->getId());
-          $mc->remove();
-          $nagioschecks->toHtml('mobile');
-          $nagioschecks->refreshWidget();
       }
 		}
     }
@@ -72,13 +68,6 @@ class nagioschecks extends eqLogic {
         $alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
         if ($nagioschecks->getIsEnable()) {
     			$nagioschecks->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'15',$alert);
-          $mc = cache::byKey('nagioschecksWidgetdashboard' . $nagioschecks->getId());
-          $mc->remove();
-          $nagioschecks->toHtml('dashboard');
-          $mc = cache::byKey('nagioschecksWidgetmobile' . $nagioschecks->getId());
-          $mc->remove();
-          $nagioschecks->toHtml('mobile');
-          $nagioschecks->refreshWidget();
       }
 		}
     }
@@ -94,13 +83,6 @@ class nagioschecks extends eqLogic {
         $alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
         if ($nagioschecks->getIsEnable()) {
     			$nagioschecks->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'30',$alert);
-          $mc = cache::byKey('nagioschecksWidgetdashboard' . $nagioschecks->getId());
-          $mc->remove();
-          $nagioschecks->toHtml('dashboard');
-          $mc = cache::byKey('nagioschecksWidgetmobile' . $nagioschecks->getId());
-          $mc->remove();
-          $nagioschecks->toHtml('mobile');
-          $nagioschecks->refreshWidget();
       }
 		}
     }
@@ -192,53 +174,25 @@ class nagioschecks extends eqLogic {
 
 
     public function toHtml($_version = 'dashboard') {
-      $mc = cache::byKey('nagioschecksWidget' . $_version . $this->getId());
-      if ($mc->getValue() != '') {
-        return $mc->getValue();
+      $replace = $this->preToHtml($_version);
+      if (!is_array($replace)) {
+        return $replace;
       }
-      if ($this->getIsEnable() != 1) {
-              return '';
-          }
-          if (!$this->hasRight('r')) {
-              return '';
-          }
-          $_version = jeedom::versionAlias($_version);
-          if ($this->getDisplay('hideOn' . $_version) == 1) {
-              return '';
-          }
-          $vcolor = 'cmdColor';
-          if ($_version == 'mobile') {
-              $vcolor = 'mcmdColor';
-          }
-          $parameters = $this->getDisplay('parameters');
-          $cmdColor = ($this->getPrimaryCategory() == '') ? '' : jeedom::getConfiguration('eqLogic:category:' . $this->getPrimaryCategory() . ':' . $vcolor);
-          if (is_array($parameters) && isset($parameters['background_cmd_color'])) {
-              $cmdColor = $parameters['background_cmd_color'];
-          }
+      $version = jeedom::versionAlias($_version);
+      if ($this->getDisplay('hideOn' . $version) == 1) {
+        return '';
+      }
 
-          if (($_version == 'dview' || $_version == 'mview') && $this->getDisplay('doNotShowNameOnView') == 1) {
-              $replace['#name#'] = '';
-              $replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
-          }
-          if (($_version == 'mobile' || $_version == 'dashboard') && $this->getDisplay('doNotShowNameOnDashboard') == 1) {
-              $replace['#name#'] = '<br/>';
-              $replace['#object_name#'] = (is_object($object)) ? $object->getName() : '';
-          }
+      foreach ($this->getCmd('info') as $cmd) {
+        $replace['#' . $cmd->getLogicalId() . '_history#'] = '';
+        $replace['#' . $cmd->getLogicalId() . '_id#'] = $cmd->getId();
+        $replace['#' . $cmd->getLogicalId() . '#'] = $cmd->execCmd();
+        $replace['#' . $cmd->getLogicalId() . '_collect#'] = $cmd->getCollectDate();
+        if ($cmd->getIsHistorized() == 1) {
+          $replace['#' . $cmd->getLogicalId() . '_history#'] = 'history cursor';
+        }
+      }
 
-          if (is_array($parameters)) {
-              foreach ($parameters as $key => $value) {
-                  $replace['#' . $key . '#'] = $value;
-              }
-          }
-      $background=$this->getBackgroundColor($_version);
-      $replace = array(
-        '#name#' => $this->getName(),
-        '#id#' => $this->getId(),
-        '#background_color#' => $background,
-        '#height#' => $this->getDisplay('height', 'auto'),
-        '#width#' => $this->getDisplay('width', '200px'),
-        '#eqLink#' => ($this->hasRight('w')) ? $this->getLinkToConfiguration() : '#',
-      );
     $checkList = '';
 
     foreach($this->getCmd() as $cmd){
@@ -263,25 +217,7 @@ class nagioschecks extends eqLogic {
       $checkList = $checkList . '<p>' . $div . $cmd->getName() . ' : ' . $text . '</div></p>';
     }
 
-
-      $replace = array(
-            '#name#' => $this->getName(),
-              '#checks#' => $checkList,
-              '#id#' => $this->getId(),
-              '#collectDate#' => $update,
-              '#background_color#' => $this->getBackgroundColor(jeedom::versionAlias($_version)),
-              '#eqLink#' => $this->getLinkToConfiguration(),
-          );
-
-        $parameters = $this->getDisplay('parameters');
-        if (is_array($parameters)) {
-            foreach ($parameters as $key => $value) {
-                $replace['#' . $key . '#'] = $value;
-            }
-        }
-
         $html = template_replace($replace, getTemplate('core', $_version, 'nagioschecks', 'nagioschecks'));
-        cache::set('nagioschecksWidget' . $_version . $this->getId(), $html, 0);
         return $html;
     }
 
