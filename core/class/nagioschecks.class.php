@@ -219,7 +219,8 @@ class nagioschecks extends eqLogic {
 
     $replace['#checks#'] = $checkList;
 
-        $html = template_replace($replace, getTemplate('core', $_version, 'nagioschecks', 'nagioschecks'));
+        $html = template_replace($replace, getTemplate('core', $version, 'nagioschecks', 'nagioschecks'));
+        cache::set('nagioschecksWidget' . $_version . $this->getId(), $html, 0);
         return $html;
     }
 
