@@ -53,6 +53,7 @@ class nagioschecks extends eqLogic {
         $alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
         if ($nagioschecks->getIsEnable()) {
     			$nagioschecks->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'5',$alert);
+          $nagioschecks->refreshWidget();
       }
 		}
     }
@@ -68,6 +69,7 @@ class nagioschecks extends eqLogic {
         $alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
         if ($nagioschecks->getIsEnable()) {
     			$nagioschecks->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'15',$alert);
+          $nagioschecks->refreshWidget();
       }
 		}
     }
@@ -83,6 +85,7 @@ class nagioschecks extends eqLogic {
         $alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
         if ($nagioschecks->getIsEnable()) {
     			$nagioschecks->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'30',$alert);
+          $nagioschecks->refreshWidget();
       }
 		}
     }
