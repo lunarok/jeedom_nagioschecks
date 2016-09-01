@@ -222,19 +222,12 @@ class nagioschecks extends eqLogic {
 
     $replace['#checks#'] = $checkList;
 
-    return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'current', 'nagioschecks')));
+    return $this->postToHtml($_version, template_replace($replace, getTemplate('core', $version, 'nagioschecks', 'nagioschecks')));
     }
 
 }
 
 class nagioschecksCmd extends cmd {
-    /*     * *************************Attributs****************************** */
-
-
-
-    /*     * ***********************Methode static*************************** */
-
-    /*     * *********************Methode d'instance************************* */
     public function execute($_options = null) {
               log::add('nagioschecks', 'info', 'Commande recue');
               if ($_options['option'] == 'status') {
