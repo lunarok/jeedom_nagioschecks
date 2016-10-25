@@ -1,0 +1,25 @@
+==== Configuration du plugin
+
+Le plugin ne comporte pas de configuration générale.
+
+Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...)
+
+Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs ...) qui corresponderont chacune à une commande à lancer (un check_***)
+
+Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn) ainsi que le nombre de checks successifs en erreur après quoi le plugin notifira via la commande équipement
+
+L'équipement dispose de paramètres pour la configuration de la connexion SSH si celle ci est nécessaire (dans ce cas on utilise alors le check_by_ssh qui se connecte à un serveur distant pour éxécuter un plugin nagios)
+
+Il y a également une commande d'alerte définissable par équipement pour être notifier des erreurs
+
+Le plugin installe automatiquement le paquet nagios-plugins qui vient avec de nombreux scripts (check_***) Mais si ce n'est pas suffisant, on peut rajouter tout script Nagios dans le répertoire /usr/lib/nagios/plugins/
+
+===== Résultat de commande dans un scénario
+
+Il est possible de récupérer la sortie Label du check dans un scénario en utilisant en bloc code :
+
+$status = $cmd->getConfiguration('status');
+
+Par exemple comme sur ce screenshot.
+
+image::../images/nagioschecks_screenshot2.png[Exemple execCmd avec options]
