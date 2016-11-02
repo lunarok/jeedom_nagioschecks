@@ -1,12 +1,12 @@
-== Description
+== Beschreibung
 include::presentation.asciidoc[]
 
 '''
-== Configuration
+== Konfiguration
 include::configuration.asciidoc[]
 
 '''
-== Cas d'usage
+== Anwendungsfall
 include::exemples.asciidoc[]
 
 '''
@@ -14,10 +14,10 @@ include::exemples.asciidoc[]
 include::faq.asciidoc[]
 
 '''
-== Troubleshoting
+== Fehlersuche
 include::troubleshoting.asciidoc[]
 
 
 '''
-== Changelog
+== Änderungsprotokoll
 include::changelog.asciidoc[]
