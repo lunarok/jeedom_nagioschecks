@@ -97,7 +97,8 @@ class nagioschecks extends eqLogic {
       $sshport = $this->getConfiguration('sshport');
       $sshkey = $this->getConfiguration('sshkey');
       $sshpath = $this->getConfiguration('sshpath');
-      $this->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath);
+	$alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
+      $this->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'all',$alert);
       $this->refreshWidget();
     }
 
@@ -110,7 +111,7 @@ class nagioschecks extends eqLogic {
         if ($tempo == '') {
           $tempo = '15';
         }
-        if ($cmd->getConfiguration('cron') == $cron) {
+        if ($cmd->getConfiguration('cron') == $cron || 'all' == $cron) {
             $alert = $cmd->getConfiguration('alert');
     				$check = $cmd->getConfiguration('check');
             $options = $cmd->getConfiguration('options');
