@@ -97,7 +97,7 @@ class nagioschecks extends eqLogic {
       $sshport = $this->getConfiguration('sshport');
       $sshkey = $this->getConfiguration('sshkey');
       $sshpath = $this->getConfiguration('sshpath');
-	$alert = str_replace('#','',$nagioschecks->getConfiguration('alert'));
+	$alert = str_replace('#','',$this->getConfiguration('alert'));
       $this->getInformations($sshhost,$sshuser,$sshport,$sshkey,$sshpath,'all',$alert);
       $this->refreshWidget();
     }
