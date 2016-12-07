@@ -1,11 +1,11 @@
 {
     "plugins\/nagioschecks\/desktop\/php\/nagioschecks.php": {
-        "Ajouter un équipement": "Ajouter un équipement",
-        "Rechercher": "Rechercher",
-        "Mes nagioschecks": "Mes nagioschecks",
-        "Sauvegarder": "Sauvegarder",
-        "Supprimer": "Supprimer",
-        "Configuration avancée": "Configuration avancée",
+        "Ajouter un équipement": "Add an equipment",
+        "Rechercher": "Search",
+        "Mes nagioschecks": "My nagioschecks",
+        "Sauvegarder": "Save",
+        "Supprimer": "Delete",
+        "Configuration avancée": "Advanced setup",
         "Dupliquer": "Dupliquer",
         "Equipement": "Equipement",
         "Commandes": "Commandes",
