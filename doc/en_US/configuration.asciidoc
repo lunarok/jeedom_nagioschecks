@@ -1,6 +1,6 @@
 ==== The plugin configuration
 
-Le plugin ne comporte pas de configuration générale.
+The plugin does not have general configuration.
 
 Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...)
 
