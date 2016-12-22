@@ -1,6 +1,6 @@
 ==== Check Nagios, éxécuter des checks Nagios dans Jeedom
 
-Ce plugin permet d'obtenir le résultat de checks Nagios. Nagios est un logiciel de supervision disposant de scripts qui couvrent un très large domaine d'utilisations.
+This plugin allows to get the result of Nagios checks. Nagios is a monitoring software with scripts that cover a very wide range of uses.
 
 Les scripts peuvent être éxécutés en local ou via SSH (via check_by_ssh)
 
