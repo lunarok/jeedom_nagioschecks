@@ -171,11 +171,11 @@ $eqLogics = eqLogic::byType('nagioschecks');
         <tr>
           <th style="width: 50px;">#</th>
           <th style="width: 100px;">{{Nom}}</th>
-          <th style="width: 50px;">{{Cron}}</th>
-          <th style="width: 50px;">{{Alerte}}</th>
+          <th style="width: 100px;">{{Cron}}</th>
+          <th style="width: 100px;">{{Alerte}}</th>
           <th style="width: 100px;">{{Options}}</th>
-          <th style="width: 200px;">{{Check}}</th>
-          <th style="width: 200px;">{{Valeur}}</th>
+          <th style="width: 250px;">{{Check}}</th>
+          <th style="width: 250px;">{{Valeur}}</th>
           <th style="width: 100px;">{{Paramètres}}</th>
           <th style="width: 50px;"></th>
         </tr>

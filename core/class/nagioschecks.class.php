@@ -41,7 +41,7 @@ class nagioschecks extends eqLogic {
     public static function cronDaily() {
         foreach (eqLogic::byType('nagioschecks', true) as $nagioschecks) {
             foreach ($nagioschecks->getCmd() as $cmd) {
-                $cmd->setConfiguration('alert', '0');
+                $cmd->setConfiguration('alert', 0);
                 $cmd->setConfiguration('alertsend', 0);
                 $cmd->setConfiguration('cmdexec', 0);
                 $cmd->save();
@@ -128,7 +128,7 @@ class nagioschecks extends eqLogic {
                     }
                 } else {
                     if ($alert != '0') {
-                        $cmd->setConfiguration('alert', '0');
+                        $cmd->setConfiguration('alert', 0);
                         $cmd->setConfiguration('alertsend', 0);
                         $cmd->setConfiguration('cmdexec', 0);
                     }
@@ -156,7 +156,6 @@ class nagioschecks extends eqLogic {
 
             }
         }
-        //log::add('nagioschecks', 'debug', print_r($this,true));
         return ;
     }
 

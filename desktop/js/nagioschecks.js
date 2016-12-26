@@ -20,7 +20,7 @@
      });
  });
 
- $('.bt_selectAlertCmd').on('click', function () {
+ $('#bt_selectAlertCmd').on('click', function () {
      jeedom.cmd.getSelectModal({cmd: {type: 'action', subType: 'other'}}, function (result) {
          $('.cmdAttr[data-l2key=cmdalert]').atCaret('insert', result.human);
      });
@@ -52,14 +52,14 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += 'Action : ';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdalert" style="width : 80px;" disabled>';
     tr += '<span class="input-group-btn">';
-    tr += '<a class="btn btn-default cursor bt_selectAlertCmd" title="Rechercher une commande"><i class="fa fa-list-alt"></i></a>';
+    tr += '<a class="btn btn-default cursor" id="bt_selectAlertCmd" title="Rechercher une commande"><i class="fa fa-list-alt"></i></a>';
     tr += '</span>';
     tr += '</td>';
     tr += '<td>';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="configuration" data-l2key="ssh" />{{Par SSH}}</label></span> ';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="configuration" data-l2key="sudo" />{{Avec Sudo}}</label></span> ';
     tr += '<td>Check : ';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="check" style="width : 140px;" placeholder="{{Check}}"></td>';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="check" style="width : 140px;" placeholder="{{Check}}">';
     tr += '<br>Options : ';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="options" style="width : 140px;" placeholder="{{Options}}">';
     tr += '<td>';
