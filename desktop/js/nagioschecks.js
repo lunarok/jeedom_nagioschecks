@@ -42,7 +42,7 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '<input class="cmdAttr" data-l1key="subtype" value="string" style="display:none;" />';
     tr += '</td>';
     tr += '<td>';
-    tr += '<select class="cmdAttr" data-l1key="configuration" data-l2key="cron" style="height : 33px; width : 60%;display : inline-block;">';
+    tr += '<select class="cmdAttr" data-l1key="configuration" data-l2key="cron" style="height : 33px; width : 90%;display : inline-block;">';
     tr += '<option value="5">5 mn</option>';
     tr += '<option value="15">15 mn</option>';
     tr += '<option value="30">30 mn</option>';
@@ -52,16 +52,16 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="notifalert" style="width : 80px;" placeholder="{{3 checks}}">';
     tr += '<br>';
     tr += 'Action : ';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdalert" style="width : 80px;" disabled>';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdalert" style="width : 140px;" disabled>';
     tr += '<a class="btn btn-default btn-sm cursor listEquipementAction" data-input="cmdalert" style="margin-left : 5px;"><i class="fa fa-list-alt "></i> {{Rechercher équipement}}</a>';
     tr += '</td>';
     tr += '<td>';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="configuration" data-l2key="ssh" />{{Par SSH}}</label></span> ';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="configuration" data-l2key="sudo" />{{Avec Sudo}}</label></span> ';
     tr += '<td>Check : ';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="check" style="width : 140px;" placeholder="{{Check}}">';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="check" style="width : 200px;" placeholder="{{Check}}">';
     tr += '<br>Options : ';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="options" style="width : 140px;" placeholder="{{Options}}">';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="options" style="width : 200px;" placeholder="{{Options}}">';
     tr += '<td>';
     tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="code"></span> : <span class="cmdAttr" data-l1key="configuration" data-l2key="status"></span>';
     tr += '</td>';

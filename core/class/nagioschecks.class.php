@@ -98,7 +98,7 @@ class nagioschecks extends eqLogic {
                 if ($alert == '') {
                     $alert = 0;
                 }
-                $notifalert = $cmd->getConfiguration('notifalert');
+                $notifalert = $cmd->getConfiguration('notifalert','');
 
                 $cline = $cmd->getConfiguration('check') . ' ' . $cmd->getConfiguration('options');
                 $cline = ($cmd->getConfiguration('ssh') == '1') ? $this->getConfiguration('sshpath') . $cline : '/usr/lib/nagios/plugins/' . $cline;
@@ -112,7 +112,7 @@ class nagioschecks extends eqLogic {
                 $output = array();
                 exec($cline, $output, $return_var);
                 //$return_var = '0';
-                if ($return_var != '0' && $notifalert != '') {
+                if ($return_var != 0 && $notifalert != '') {
                     if ($alert > $notifalert) {
                         $this->alertCmd($cmd->getName(), $output[0]);
                         $cmd->setConfiguration('alertsend', 1);
@@ -122,16 +122,14 @@ class nagioschecks extends eqLogic {
                         $cmd->setConfiguration('alertsend', 0);
                     }
                     if ($cmd->getConfiguration('cmdexec') != 1 && $cmd->getConfiguration('cmdalert','') != '') {
-                        $cmd = cmd::byId(str_replace('#','',$cmd->getConfiguration('cmdalert')));
-                        $cmd->execCmd();
+                        $cmdexec = cmd::byId(str_replace('#','',$cmd->getConfiguration('cmdalert')));
+                        $cmdexec->execCmd();
                         $cmd->setConfiguration('cmdexec', 1);
                     }
                 } else {
-                    if ($alert != '0') {
-                        $cmd->setConfiguration('alert', 0);
-                        $cmd->setConfiguration('alertsend', 0);
-                        $cmd->setConfiguration('cmdexec', 0);
-                    }
+                    $cmd->setConfiguration('alert', 0);
+                    $cmd->setConfiguration('alertsend', 0);
+                    $cmd->setConfiguration('cmdexec', 0);
                 }
                 if ($return_var == '0') {
                     $value = 1;
@@ -144,14 +142,13 @@ class nagioschecks extends eqLogic {
                 $cmd->save();
                 $cmd->event($value);
                 log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' text ' . $output[0]);
-                //log::add('nagioschecks', 'debug', print_r($cmd,true));
 
                 //Traitement métriques
                 if (strpos($output[0], '|') !== false) {
                     $metric = substr($output[0], 0, strpos($output[0], '|'));
                     $cmd->setConfiguration('hasMetric', '1');
                     $cmd->save();
-                    log::add('nagioschecks', 'debug', $metric);
+                    //log::add('nagioschecks', 'debug', $metric);
                 }
 
             }
@@ -163,7 +160,6 @@ class nagioschecks extends eqLogic {
 
 class nagioschecksCmd extends cmd {
     public function execute($_options = null) {
-        log::add('nagioschecks', 'info', 'Commande recue');
         if ($_options['option'] == 'status') {
             return $this->getConfiguration('status');
         } else if ($_options['option'] == 'code') {
