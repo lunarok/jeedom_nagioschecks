@@ -113,7 +113,8 @@ class nagioschecks extends eqLogic {
                 exec($cline, $output, $return_var);
                 //$return_var = '0';
                 log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' label ' . $output[0] . ' notif ' . $notifalert . ' ' . $alert);
-                if ($return_var != 0 && $notifalert != '') {
+                $value = ($return_var == 0) ? 1 : 0;
+                if ($value == 0 && $notifalert != '') {
                     if ($alert >= $notifalert) {
                         log::add('nagioschecks', 'debug', 'Alert : ' . $return_var . ' ' . $notifalert . ' ' . $alert);
                         $this->alertCmd($cmd->getName(), $output[0]);
@@ -132,11 +133,6 @@ class nagioschecks extends eqLogic {
                     $cmd->setConfiguration('alert', 0);
                     $cmd->setConfiguration('alertsend', 0);
                     $cmd->setConfiguration('cmdexec', 0);
-                }
-                if ($return_var == '0') {
-                    $value = 1;
-                } else {
-                    $value = 0;
                 }
                 $cmd->setConfiguration('value', $value);
                 $cmd->setConfiguration('code', $return_var);
