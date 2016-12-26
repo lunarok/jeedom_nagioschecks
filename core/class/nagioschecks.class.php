@@ -112,6 +112,7 @@ class nagioschecks extends eqLogic {
                 $output = array();
                 exec($cline, $output, $return_var);
                 //$return_var = '0';
+                log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' label ' . $output[0] . ' notif ' . $notifalert . ' ' . $alert);
                 if ($return_var != 0 && $notifalert != '') {
                     if ($alert >= $notifalert) {
                         $this->alertCmd($cmd->getName(), $output[0]);
@@ -141,7 +142,7 @@ class nagioschecks extends eqLogic {
                 $cmd->setConfiguration('status', $output[0]);
                 $cmd->save();
                 $cmd->event($value);
-                log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' text ' . $output[0]);
+
 
                 //Traitement métriques
                 if (strpos($output[0], '|') !== false) {
