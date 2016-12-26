@@ -113,7 +113,7 @@ class nagioschecks extends eqLogic {
                 exec($cline, $output, $return_var);
                 //$return_var = '0';
                 if ($return_var != 0 && $notifalert != '') {
-                    if ($alert > $notifalert) {
+                    if ($alert >= $notifalert) {
                         $this->alertCmd($cmd->getName(), $output[0]);
                         $cmd->setConfiguration('alertsend', 1);
                     } else {

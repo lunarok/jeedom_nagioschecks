@@ -39,7 +39,7 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '<td>';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="name" style="width : 140px;" placeholder="{{Nom}}">';
     tr += '<input class="cmdAttr" data-l1key="type" value="info" style="display:none;" />';
-    tr += '<input class="cmdAttr" data-l1key="subtype" value="string" style="display:none;" />';
+    tr += '<input class="cmdAttr" data-l1key="subtype" value="binary" style="display:none;" />';
     tr += '</td>';
     tr += '<td>';
     tr += '<select class="cmdAttr" data-l1key="configuration" data-l2key="cron" style="height : 33px; width : 90%;display : inline-block;">';
