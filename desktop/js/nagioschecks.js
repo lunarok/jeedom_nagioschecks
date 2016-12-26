@@ -43,6 +43,13 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="notifalert" style="width : 80px;" placeholder="{{3 checks}}">';
     tr += '</td>';
     tr += '<td>';
+    tr += '<div>';
+    tr += '<input class="form-control" style="width: 10%; display : inline-block;" id="cmdSupportId" disabled>';
+    tr += '<input class="form-control" id="cmdSupportHumanName" placeholder="Commande Info associée" style="width: 80%; display : inline-block;" disabled>';
+    tr += '<a class="btn btn-default cursor listEquipement" data-input="cmdSupport"><i class="fa fa-list-alt "></i></a>';
+    tr += '</div>';
+    tr += '</td>';
+    tr += '<td>';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="configuration" data-l2key="ssh" />{{Par SSH}}</label></span> ';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="configuration" data-l2key="sudo" />{{Avec Sudo}}</label></span> ';
     tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="check" style="width : 140px;" placeholder="{{Check}}"></td>';
