@@ -15,6 +15,13 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
-
+ function nagioschecks_update() {
+     foreach ($this->getCmd() as $cmd) {
+         $cmd->setTemplate("mobile",'line' );
+         $cmd->setTemplate("dashboard",'line' );
+         $cmd->setSubType("binary");
+         $cmd->save();
+     }
+ }
 
 ?>

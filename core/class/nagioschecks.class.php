@@ -38,6 +38,16 @@ class nagioschecks extends eqLogic {
         exec($cmd);
     }
 
+    public static function cronDaily() {
+        foreach (eqLogic::byType('nagioschecks', true) as $nagioschecks) {
+            foreach ($nagioschecks->getCmd() as $cmd) {
+                $cmd->setConfiguration('alert', '0');
+                $cmd->setConfiguration('alertsend', 0);
+                $cmd->setConfiguration('cmdexec', 0);
+                $cmd->save();
+            }
+        }
+    }
 
     public static function cron5() {
         foreach (eqLogic::byType('nagioschecks', true) as $nagioschecks) {
@@ -102,16 +112,25 @@ class nagioschecks extends eqLogic {
                 $output = array();
                 exec($cline, $output, $return_var);
                 //$return_var = '0';
-                if ($return_var == '2' && $notifalert != '') {
+                if ($return_var != '0' && $notifalert != '') {
                     if ($alert > $notifalert) {
                         $this->alertCmd($cmd->getName(), $output[0]);
+                        $cmd->setConfiguration('alertsend', 1);
                     } else {
                         $newalerte = $alert + 1;
                         $cmd->setConfiguration('alert', $newalerte);
+                        $cmd->setConfiguration('alertsend', 0);
+                    }
+                    if ($cmd->getConfiguration('cmdexec') != 1 && $cmd->getConfiguration('cmdalert','') != '') {
+                        $cmd = cmd::byId(str_replace('#','',$cmd->getConfiguration('cmdalert')));
+                        $cmd->execCmd();
+                        $cmd->setConfiguration('cmdexec', 1);
                     }
                 } else {
                     if ($alert != '0') {
                         $cmd->setConfiguration('alert', '0');
+                        $cmd->setConfiguration('alertsend', 0);
+                        $cmd->setConfiguration('cmdexec', 0);
                     }
                 }
                 if ($return_var == '0') {
@@ -123,7 +142,7 @@ class nagioschecks extends eqLogic {
                 $cmd->setConfiguration('code', $return_var);
                 $cmd->setConfiguration('status', $output[0]);
                 $cmd->save();
-                $cmd->event($return_var);
+                $cmd->event($value);
                 log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' text ' . $output[0]);
                 //log::add('nagioschecks', 'debug', print_r($cmd,true));
 
