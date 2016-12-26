@@ -115,6 +115,7 @@ class nagioschecks extends eqLogic {
                 log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' label ' . $output[0] . ' notif ' . $notifalert . ' ' . $alert);
                 if ($return_var != 0 && $notifalert != '') {
                     if ($alert >= $notifalert) {
+                        log::add('nagioschecks', 'debug', 'Alert : ' . $return_var . ' ' . $notifalert . ' ' . $alert);
                         $this->alertCmd($cmd->getName(), $output[0]);
                         $cmd->setConfiguration('alertsend', 1);
                     } else {
