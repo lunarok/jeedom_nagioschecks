@@ -61,6 +61,8 @@ class nagioschecks extends eqLogic {
         foreach ($this->getCmd() as $cmd) {
             $cmd->setTemplate("mobile",$widget );
             $cmd->setTemplate("dashboard",$widget );
+            $cmd->setSubType("binary");
+            $cmd->save();
         }
         $this->getInformations('all');
     }
