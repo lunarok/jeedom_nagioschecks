@@ -59,8 +59,8 @@ class nagioschecks extends eqLogic {
 
     public function postAjax() {
         foreach ($this->getCmd() as $cmd) {
-            $cmd->setTemplate("mobile",$widget );
-            $cmd->setTemplate("dashboard",$widget );
+            $cmd->setTemplate("mobile",'line' );
+            $cmd->setTemplate("dashboard",'line' );
             $cmd->setSubType("binary");
             $cmd->save();
         }
@@ -94,7 +94,7 @@ class nagioschecks extends eqLogic {
                 $cline = ($cmd->getConfiguration('ssh') == '1') ? $this->getConfiguration('sshpath') . $cline : '/usr/lib/nagios/plugins/' . $cline;
                 $cline = ($cmd->getConfiguration('sudo') == '1') ? 'sudo ' . $cline : $cline;
 
-                if ($ssh == '1') {
+                if ($cmd->getConfiguration('ssh') == '1') {
                     $cline = '/usr/lib/nagios/plugins/check_by_ssh -H ' . $this->getConfiguration('sshhost') . ' -l ' . $this->getConfiguration('sshuser') . ' -p ' . $this->getConfiguration('sshport') . ' -i ' . $this->getConfiguration('sshkey') . ' -C "' . $cline . '"';
                 }
                 log::add('nagioschecks', 'debug', 'Command : ' . $cline);
