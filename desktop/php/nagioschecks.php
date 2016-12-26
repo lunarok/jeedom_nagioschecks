@@ -24,7 +24,7 @@ $eqLogics = eqLogic::byType('nagioschecks');
   </div>
 
   <div class="col-lg-10 col-md-9 col-sm-8 eqLogicThumbnailDisplay" style="border-left: solid 1px #EEE; padding-left: 25px;">
-    <legend>{{Mes nagioschecks}}
+    <legend>{{Mes Nagios}}
     </legend>
     <div class="eqLogicThumbnailContainer">
       <div class="cursor eqLogicAction" data-action="add" style="background-color : #ffffff; height : 200px;margin-bottom : 10px;padding : 5px;border-radius: 2px;width : 160px;margin-left : 10px;" >
@@ -63,7 +63,6 @@ $eqLogics = eqLogic::byType('nagioschecks');
           <fieldset>
             <legend><i class="fa fa-arrow-circle-left eqLogicAction cursor" data-action="returnToThumbnailDisplay"></i>  {{Général}}
               <i class='fa fa-cogs eqLogicAction pull-right cursor expertModeVisible' data-action='configure'></i>
-              <a class="btn btn-xs btn-default pull-right eqLogicAction" data-action="copy"><i class="fa fa-files-o"></i> {{Dupliquer}}</a>
             </legend>
             <div class="form-group">
               <label class="col-sm-3 control-label">{{Equipement}}</label>
@@ -171,9 +170,10 @@ $eqLogics = eqLogic::byType('nagioschecks');
       <thead>
         <tr>
           <th style="width: 50px;">#</th>
-          <th style="width: 200px;">{{Nom}}</th>
-          <th style="width: 100px;">{{Fréquence}}</th>
-          <th style="width: 100px;">{{Alerte après}}</th>
+          <th style="width: 100px;">{{Nom}}</th>
+          <th style="width: 50px;">{{Cron}}</th>
+          <th style="width: 50px;">{{Essais}}</th>
+          <th style="width: 100px;">{{Action erreur}}</th>
           <th style="width: 100px;">{{Options}}</th>
           <th style="width: 200px;">{{Check}}</th>
           <th style="width: 200px;">{{Arguments}}</th>

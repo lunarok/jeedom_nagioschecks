@@ -20,6 +20,12 @@
      });
  });
 
+ $('.bt_selectAlertCmd').on('click', function () {
+     jeedom.cmd.getSelectModal({cmd: {type: 'action', subType: 'other'}}, function (result) {
+         $('.cmdAttr[data-l2key=cmdalert]').atCaret('insert', result.human);
+     });
+ });
+
 $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder: "ui-state-highlight", tolerance: "intersect", forcePlaceholderSize: true});
 
  function addCmdToTable(_cmd) {
@@ -44,9 +50,10 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '</td>';
     tr += '<td>';
     tr += '<div>';
-    tr += '<input class="form-control" style="width: 10%; display : inline-block;" id="cmdSupportId" disabled>';
-    tr += '<input class="form-control" id="cmdSupportHumanName" placeholder="Commande Info associée" style="width: 80%; display : inline-block;" disabled>';
-    tr += '<a class="btn btn-default cursor listEquipement" data-input="cmdSupport"><i class="fa fa-list-alt "></i></a>';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdalert" style="width : 80px;" disabled>';
+    tr += '<span class="input-group-btn">';
+    tr += '<a class="btn btn-default cursor bt_selectAlertCmd" title="Rechercher une commande"><i class="fa fa-list-alt"></i></a>';
+    tr += '</span>';
     tr += '</div>';
     tr += '</td>';
     tr += '<td>';
