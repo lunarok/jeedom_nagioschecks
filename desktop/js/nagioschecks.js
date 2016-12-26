@@ -48,13 +48,14 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="check" style="width : 140px;" placeholder="{{Check}}"></td>';
     tr += '<td><input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="options" style="width : 140px;" placeholder="{{Options}}"></td>';
     tr += '<td>';
-    tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="value"></span> : <span class="cmdAttr" data-l1key="configuration" data-l2key="status"></span>';
+    tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="code"></span> : <span class="cmdAttr" data-l1key="configuration" data-l2key="status"></span>';
     tr += '</td>';
     tr += '<td>';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span> ';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
     tr += '</td>';
     tr += '<td>';
+    tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
     tr += '<i class="fa fa-minus-circle pull-right cmdAction cursor" data-action="remove"></i>';
     tr += '</td>';
     tr += '</tr>';
