@@ -20,9 +20,11 @@
      });
  });
 
- $('#bt_selectAlertCmd').on('click', function () {
+ $("#table_cmd").delegate(".listEquipementAction", 'click', function () {
+     var el = $(this);
      jeedom.cmd.getSelectModal({cmd: {type: 'action', subType: 'other'}}, function (result) {
-         $('.cmdAttr[data-l2key=cmdalert]').atCaret('insert', result.human);
+         var calcul = el.closest('tr').find('.cmdAttr[data-l1key=configuration][data-l2key=' + el.attr('data-input') + ']');
+         calcul.atCaret('insert', result.human);
      });
  });
 
@@ -51,9 +53,7 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '<br>';
     tr += 'Action : ';
     tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdalert" style="width : 80px;" disabled>';
-    tr += '<span class="input-group-btn">';
-    tr += '<a class="btn btn-default cursor" id="bt_selectAlertCmd" title="Rechercher une commande"><i class="fa fa-list-alt"></i></a>';
-    tr += '</span>';
+    tr += '<a class="btn btn-default btn-sm cursor listEquipementAction" data-input="cmdalert" style="margin-left : 5px;"><i class="fa fa-list-alt "></i> {{Rechercher équipement}}</a>';
     tr += '</td>';
     tr += '<td>';
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="configuration" data-l2key="ssh" />{{Par SSH}}</label></span> ';
