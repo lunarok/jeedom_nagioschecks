@@ -1,4 +1,4 @@
-==== Cas d'usage, exemples d'implémentation
+==== Use cases, examples of implementation
 
 Here are some usage examples.
 

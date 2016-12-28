@@ -1,4 +1,4 @@
-==== Check Nagios, éxécuter des checks Nagios dans Jeedom
+==== Check Nagios, run Nagios checks in Jeedom
 
 This plugin allows to get the result of Nagios checks. Nagios is a monitoring software with scripts that cover a very wide range of uses.
 
