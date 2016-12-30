@@ -2,7 +2,7 @@
 
 The plugin does not have general configuration.
 
-Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...)
+Need to add a 'unit' equipment to supervise (understand IP, server...)
 
 Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs ...) qui corresponderont chacune à une commande à lancer (un check_***)
 

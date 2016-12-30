@@ -2,6 +2,6 @@
 
 This plugin allows to get the result of Nagios checks. Nagios is a monitoring software with scripts that cover a very wide range of uses.
 
-Les scripts peuvent être éxécutés en local ou via SSH (via check_by_ssh)
+Scripts can be executed locally or via SSH (via check_by_ssh)
 
 On peut par exemple récupérer l'état de disques durs, d'un RAID, de services ...
