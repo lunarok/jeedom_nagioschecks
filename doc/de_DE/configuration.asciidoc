@@ -1,6 +1,6 @@
-==== Configuration du plugin
+==== Plugin Konfiguration
 
-Le plugin ne comporte pas de configuration générale.
+Das Plugin enthält keine allgemeine Konfiguration.
 
 Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...)
 
