@@ -14,6 +14,12 @@ La commande est : check_log
 
 Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/cron_execution -O /tmp/cron_exec.tmp -q PHP
 
+===== Vérification de la présence d'un fichier de sauvegarde récent
+
+La commande est : check_backup.sh
+
+Les arguments par exemple : -D /usr/share/nginx/www/jeedom/backup
+
 ===== Vérification de la présence d'un service
 
 Un des checks à disposition est check_procs. Un usage basique est de lui donner le nombre de process qui doivent être existant et le label à chercher.

@@ -9,7 +9,7 @@ do
         esac
 done
 
-if [ $(find $DIRECTORY -mtime -1 | wc -l) -gt 0 ]; then 
+if [ $(find $DIRECTORY -not -path '*/\.*' -mtime -1 | wc -l) -gt 1 ]; then 
     EXIT_STRING="Backup find\n"
     EXIT_CODE=0
 else
