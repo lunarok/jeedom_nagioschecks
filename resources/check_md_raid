@@ -1,0 +1,162 @@
+#!/bin/bash
+
+###############################################################################
+#                                                                             #
+#  Copyright (C) 2013 Ryan Loudfoot <ryan@delotha.com>                        #
+#                                                                             #
+#   This program is free software; you can redistribute it and/or modify      #
+#   it under the terms of the GNU General Public License as published by      #
+#   the Free Software Foundation; either version 2 of the License, or         #
+#   (at your option) any later version.                                       #
+#                                                                             #
+#   This program is distributed in the hope that it will be useful,           #
+#   but WITHOUT ANY WARRANTY; without even the implied warranty of            #
+#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the             #
+#   GNU General Public License for more details.                              #
+#                                                                             #
+###############################################################################
+
+###############################################################################
+# The latest version of check_smart can be found at:                          #
+# https://github.com/Elyrith/check_md_raid                                    #
+###############################################################################
+
+VERSION="0.15"
+AUTHOR="(c) 2013 Ryan Loudfoot (ryan@delotha.com)"
+
+# Sensor program
+CHECKPROG=/sbin/mdadm
+
+# Ryan's note: utils.sh is installed with nagios-plugins in with the plugins
+# Check if utils.sh exists. This lets you use check_domain in a testing environment
+# or outside of Nagios.
+if [ -e "$PROGPATH/utils.sh" ]; then
+	. "$PROGPATH/utils.sh"
+else
+	STATE_OK=0
+	STATE_WARNING=1
+	STATE_CRITICAL=2
+	STATE_UNKNOWN=3
+#	STATE_DEPENDENT=4    (Commented because it's unused.)
+fi
+
+shopt -s extglob
+
+#### Functions ####
+
+# Print version information
+print_version()
+{
+	echo "$0 - $VERSION"
+}
+
+#Print help information
+print_help()
+{
+	print_version
+	echo "$AUTHOR"
+	echo "Check RAID data and report results"
+/bin/cat <<EOT
+
+Options:
+-h
+   Print detailed help screen
+-V
+   Print version information
+
+--warning
+   Issue a warning state instead of a critical state
+   Default is critical
+
+--raid /dev/md0
+   Set which RAID to check
+ 
+EOT
+}
+
+
+###### MAIN ########
+
+# Hardware to monitor
+raid=/dev/md0
+
+# See if we have smartctl installed and can execute it
+if [[ ! -x "$CHECKPROG" ]]; then
+	echo "It appears you don't have mdadm installed in $CHECKPROG"
+	exit $STATE_UNKOWN
+fi
+
+# Parse command line options
+while [[ -n "$1" ]]; do 
+   case "$1" in
+
+       -h | --help)
+           print_help
+           exit $STATE_OK
+           ;;
+
+       -V | --version)
+           print_version
+           exit $STATE_OK
+           ;;
+
+       -\?)
+	   print_help
+           exit $STATE_OK
+           ;;
+
+       --warning)
+           warning="yes"
+	   shift 1
+	   ;;
+
+       --raid)
+	   if [[ -z "$2" ]]; then
+		echo "Option $1 requires an argument | Option $1 requires an argument"
+		print_help
+		exit $STATE_UNKNOWN
+	   fi
+		raid=$2
+           shift 2
+           ;;
+
+	*)
+           echo "Invalid option $1 | Invalid option $1"
+           print_help
+           exit $STATE_UNKNOWN
+           ;;
+
+
+   esac
+done
+
+# Check if a RAID was specified
+if [[ -z "$raid" ]]; then
+	# No sensor to monitor were specified
+	echo "No raid specified"
+	print_help
+	exit $STATE_UNKNOWN
+fi
+
+
+#Get the SMART data
+mdadm=$($CHECKPROG --detail "$raid" | grep "faulty")
+
+perfdata=$(cat /proc/mdstat | grep md0)
+
+if [[ "$mdadm" == '' ]]; then
+	echo "$raid is CLEAN | $perfdata"
+	exit $STATE_OK
+
+#See if we wanted a warning instead of a critical
+elif [[ "$warning" == "yes" ]]; then
+		echo "$raid is FAULTY | $perfdata"
+		exit $STATE_WARNING
+
+#Critical
+else	
+	echo "$raid is FAULTY | $perfdata"
+	exit $STATE_CRITICAL
+fi
+
+exit $STATE_UNKNOWN
