@@ -2,6 +2,18 @@
 
 Voici quelques exemples d'utilisation.
 
+===== Vérification du log d'erreurs Web
+
+La commande est : check_log
+
+Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/nginx-error.log -O /tmp/nginx.tmp -q ?
+
+===== Vérification du log cron_execution de Jeedom
+
+La commande est : check_log
+
+Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/cron_execution -O /tmp/cron_exec.tmp -q PHP
+
 ===== Vérification de la présence d'un service
 
 Un des checks à disposition est check_procs. Un usage basique est de lui donner le nombre de process qui doivent être existant et le label à chercher.
