@@ -20,6 +20,23 @@
 require_once dirname(__FILE__) . '/../../../../core/php/core.inc.php';
 
 class nagioschecks extends eqLogic {
+    public static function dependancy_info() {
+        $return = array();
+        $return['log'] = 'nagios_plugins';
+        $file = dirname(__FILE__) . '/../../resources/check_apt';
+        if (is_executable($file)) {
+            $return['state'] = 'ok';
+        } else {
+            $return['state'] = 'nok';
+        }
+        return $return;
+    }
+
+    public static function dependancy_install() {
+        $cmd = 'sudo chmod +x ' . dirname(__FILE__) . '/../../resources/*';
+        exec($cmd);
+    }
+
     public static function cronDaily() {
         foreach (eqLogic::byType('nagioschecks', true) as $nagioschecks) {
             foreach ($nagioschecks->getCmd() as $cmd) {
