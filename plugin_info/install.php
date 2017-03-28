@@ -23,7 +23,9 @@
              $cmd->setSubType("binary");
              $cmd->save();
          }
-     } 
+     }
+     $cline = 'chmod +x ' . dirname(__FILE__) . '/../../resources/*';
+     exec($cline, $output, $return_var);
  }
 
 ?>
