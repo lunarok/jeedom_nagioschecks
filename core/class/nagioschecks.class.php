@@ -125,7 +125,9 @@ class nagioschecks extends eqLogic {
                 unset($output);
                 $output = array();
                 exec($cline, $output, $return_var);
-                //$return_var = '0';
+                if ($return_var > 3) {
+                    return;
+                }
                 log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' label ' . $output[0] . ' notif ' . $notifalert . ' ' . $alert);
                 $value = ($return_var == 0) ? 1 : 0;
                 if ($value == 0 && $notifalert != '') {
