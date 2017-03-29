@@ -2,17 +2,39 @@
 
 Das Plugin enthält keine allgemeine Konfiguration.
 
+===== Configuration équipement
+
 Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...)
+
+Pour superviser un équipement distant il faut remplir les options de l'équipement suivantes (uniquement les distants) :
+
+- Adresse IP
+
+- Port SSH
+
+- Identifiant
+
+- Emplacement de la clef (uniquement les connexions par clef SSH sont supportées)
+
+- Chemin des check Nagios sur la cible (en local ils sont intégrés)
+
+Pour tous les équipements si on souhaite avoir des notifications, il faut remplir l'option de notification.
+
+===== Configuration commandes
 
 Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs ...) qui corresponderont chacune à une commande à lancer (un check_***)
 
-Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn) ainsi que le nombre de checks successifs en erreur après quoi le plugin notifira via la commande équipement
+Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn)
 
-L'équipement dispose de paramètres pour la configuration de la connexion SSH si celle ci est nécessaire (dans ce cas on utilise alors le check_by_ssh qui se connecte à un serveur distant pour éxécuter un plugin nagios)
+Si la case du nombre de check avant notification n'est pas rempli, il n'y a pas de notification pour cette commande. Pour la remplir on saisit le nombre de check en erreur de suite avant notification
 
-Il y a également une commande d'alerte définissable par équipement pour être notifier des erreurs
+On peut sélectionner si la commande est à éxécuter par SSH (dans ce cas, les options de l'équipement doivent être saisies)
 
-Le plugin installe automatiquement le paquet nagios-plugins qui vient avec de nombreux scripts (check_***) Mais si ce n'est pas suffisant, on peut rajouter tout script Nagios dans le répertoire /usr/lib/nagios/plugins/
+On peut également avoir que le check soit éxécuter avec sudo
+
+Dans la case commande on saisit le nom du check à lancer
+
+Dans la case des options on saisit les options de ce check (voir les exemples)
 
 ===== Résultat de commande dans un scénario
 
