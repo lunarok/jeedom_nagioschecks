@@ -25,6 +25,13 @@
          }
      }
 
+     $cmd = 'sudo chmod +x ' . dirname(__FILE__) . '/../../resources/*';
+     exec($cmd);
+ }
+
+ function nagioschecks_install() {
+     $cmd = 'sudo chmod +x ' . dirname(__FILE__) . '/../../resources/*';
+     exec($cmd);
  }
 
 ?>
