@@ -9,11 +9,11 @@ do
         esac
 done
 
-if [ $(grep "ERROR" -R $DIRECTORY | grep ' . date('Y-m-d', time()) . ' | wc -l ) -gt 1 ]; then
-    EXIT_STRING="Backup find\n"
+if [ $(grep "ERROR" -R $DIRECTORY | grep ' . date('Y-m-d', time()) . ' | wc -l ) -gt 0 ]; then
+    EXIT_STRING="No error in logs"
     EXIT_CODE=0
 else
-    EXIT_STRING="Backup not find\n"
+    EXIT_STRING="Error in logs"
     EXIT_CODE=2
 fi
 
