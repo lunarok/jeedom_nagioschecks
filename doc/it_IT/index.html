@@ -467,23 +467,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Le plugin ne comporte pas de configuration générale.</p>
 </div>
+<div class="sect4">
+<h5 id="_configuration_équipement">Configuration équipement</h5>
 <div class="paragraph">
 <p>Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur &#8230;&#8203;)</p>
 </div>
 <div class="paragraph">
+<p>Pour superviser un équipement distant il faut remplir les options de l&#8217;équipement suivantes (uniquement les distants) :</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Adresse IP</p>
+</li>
+<li>
+<p>Port SSH</p>
+</li>
+<li>
+<p>Identifiant</p>
+</li>
+<li>
+<p>Emplacement de la clef (uniquement les connexions par clef SSH sont supportées)</p>
+</li>
+<li>
+<p>Chemin des check Nagios sur la cible (en local ils sont intégrés)</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Pour tous les équipements si on souhaite avoir des notifications, il faut remplir l&#8217;option de notification.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_configuration_commandes">Configuration commandes</h5>
+<div class="paragraph">
 <p>Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs &#8230;&#8203;) qui corresponderont chacune à une commande à lancer (un check_***)</p>
 </div>
 <div class="paragraph">
-<p>Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn) ainsi que le nombre de checks successifs en erreur après quoi le plugin notifira via la commande équipement</p>
+<p>Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn)</p>
 </div>
 <div class="paragraph">
-<p>L&#8217;équipement dispose de paramètres pour la configuration de la connexion SSH si celle ci est nécessaire (dans ce cas on utilise alors le check_by_ssh qui se connecte à un serveur distant pour éxécuter un plugin nagios)</p>
+<p>Si la case du nombre de check avant notification n&#8217;est pas rempli, il n&#8217;y a pas de notification pour cette commande. Pour la remplir on saisit le nombre de check en erreur de suite avant notification</p>
 </div>
 <div class="paragraph">
-<p>Il y a également une commande d&#8217;alerte définissable par équipement pour être notifier des erreurs</p>
+<p>On peut sélectionner si la commande est à éxécuter par SSH (dans ce cas, les options de l&#8217;équipement doivent être saisies)</p>
 </div>
 <div class="paragraph">
-<p>Le plugin installe automatiquement le paquet nagios-plugins qui vient avec de nombreux scripts (check_***) Mais si ce n&#8217;est pas suffisant, on peut rajouter tout script Nagios dans le répertoire /usr/lib/nagios/plugins/</p>
+<p>On peut également avoir que le check soit éxécuter avec sudo</p>
+</div>
+<div class="paragraph">
+<p>Dans la case commande on saisit le nom du check à lancer</p>
+</div>
+<div class="paragraph">
+<p>Dans la case des options on saisit les options de ce check (voir les exemples)</p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_résultat_de_commande_dans_un_scénario">Résultat de commande dans un scénario</h5>
@@ -513,6 +550,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <h4 id="_cas_d_usage_exemples_d_implémentation">3.1. Cas d&#8217;usage, exemples d&#8217;implémentation</h4>
 <div class="paragraph">
 <p>Voici quelques exemples d&#8217;utilisation.</p>
+</div>
+<div class="sect4">
+<h5 id="_vérification_du_log_d_erreurs_web">Vérification du log d&#8217;erreurs Web</h5>
+<div class="paragraph">
+<p>La commande est : check_log</p>
+</div>
+<div class="paragraph">
+<p>Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/nginx-error.log -O /tmp/nginx.tmp -q ?</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_vérification_du_log_cron_execution_de_jeedom">Vérification du log cron_execution de Jeedom</h5>
+<div class="paragraph">
+<p>La commande est : check_log</p>
+</div>
+<div class="paragraph">
+<p>Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/cron_execution -O /tmp/cron_exec.tmp -q PHP</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_vérification_de_la_présence_d_un_fichier_de_sauvegarde_récent">Vérification de la présence d&#8217;un fichier de sauvegarde récent</h5>
+<div class="paragraph">
+<p>La commande est : check_backup.sh</p>
+</div>
+<div class="paragraph">
+<p>Les arguments par exemple : -D /usr/share/nginx/www/jeedom/backup</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_vérification_de_l_uptime">Vérification de l&#8217;uptime</h5>
+<div class="paragraph">
+<p>La commande est : check_uptime.pl</p>
+</div>
+<div class="paragraph">
+<p>Les arguments par exemple : -c 30</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_vérification_de_la_mémoire">Vérification de la mémoire</h5>
+<div class="paragraph">
+<p>La commande est : check_mem</p>
+</div>
+<div class="paragraph">
+<p>Les arguments par exemple : aucun</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_vérification_de_l_utilisation_cpu">Vérification de l&#8217;utilisation CPU</h5>
+<div class="paragraph">
+<p>La commande est : check_load</p>
+</div>
+<div class="paragraph">
+<p>Les arguments par exemple : -w 5,5,5 -c 10,10,10</p>
+</div>
 </div>
 <div class="sect4">
 <h5 id="_vérification_de_la_présence_d_un_service">Vérification de la présence d&#8217;un service</h5>
