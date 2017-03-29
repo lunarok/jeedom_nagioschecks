@@ -106,7 +106,13 @@ class nagioschecks extends eqLogic {
                 $notifalert = $cmd->getConfiguration('notifalert','');
 
                 $cline = $cmd->getConfiguration('check') . ' ' . $cmd->getConfiguration('options');
-                $cline = ($cmd->getConfiguration('ssh') == '1') ? $this->getConfiguration('sshpath') . $cline : dirname(__FILE__) . '/../../resources/' . $cline;
+                if ($cmd->getConfiguration('ssh') == '1') {
+                    $cline = $this->getConfiguration('sshpath') . $cline;
+                }  else if (strrpos($cline,'/') !== false) {
+                    $cline = dirname(__FILE__) . '/../../resources' . $cline;
+                } else {
+                    $cline = '/usr/lib/nagios/plugins/' . $cline;
+                }
                 $cline = ($cmd->getConfiguration('sudo') == '1') ? 'sudo ' . $cline : $cline;
 
                 if ($cmd->getConfiguration('ssh') == '1') {
