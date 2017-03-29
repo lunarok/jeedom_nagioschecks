@@ -108,7 +108,7 @@ class nagioschecks extends eqLogic {
                 }
                 $notifalert = $cmd->getConfiguration('notifalert','');
 
-                $cline = $cmd->getConfiguration('check') . ' ' . $cmd->getConfiguration('options');
+                $cline = $cmd->getConfiguration('check');
                 if ($cmd->getConfiguration('ssh') == '1') {
                     $cline = $this->getConfiguration('sshpath') . $cline;
                 }  else if (strrpos($cline,'/') !== false) {
@@ -116,6 +116,7 @@ class nagioschecks extends eqLogic {
                 } else {
                     $cline = '/usr/lib/nagios/plugins/' . $cline;
                 }
+                $cline .= ' ' . $cmd->getConfiguration('options');
                 $cline = ($cmd->getConfiguration('sudo') == '1') ? 'sudo ' . $cline : $cline;
 
                 if ($cmd->getConfiguration('ssh') == '1') {
