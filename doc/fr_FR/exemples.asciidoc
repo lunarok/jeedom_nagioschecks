@@ -20,6 +20,12 @@ La commande est : check_backup.sh
 
 Les arguments par exemple : -D /usr/share/nginx/www/jeedom/backup
 
+===== Vérification de l'uptime
+
+La commande est : check_uptime.pl
+
+Les arguments par exemple : -c 30
+
 ===== Vérification de la mémoire
 
 La commande est : check_mem

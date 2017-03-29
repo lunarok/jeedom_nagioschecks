@@ -46,13 +46,13 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '<option value="5">5 mn</option>';
     tr += '<option value="15">15 mn</option>';
     tr += '<option value="30">30 mn</option>';
+    tr += '<option value="60">60 mn</option>';
     tr +='</select>';
     tr += '<td>';
-    tr += 'Essais : ';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="notifalert" style="width : 80px;" placeholder="{{3 checks}}">';
-    tr += '<br>';
-    tr += 'Action : ';
-    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdalert" style="width : 140px;">';
+    tr += 'Check avant notif : ';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="notifalert" style="width : 200px;" placeholder="{{vide sans notif, sinon nombre}}">';
+    tr += 'Action sur erreur : ';
+    tr += '<input class="cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="cmdalert" style="width : 200px;">';
     tr += '<a class="btn btn-default btn-sm cursor listEquipementAction" data-input="cmdalert" style="margin-left : 5px;"><i class="fa fa-list-alt "></i> {{Rechercher équipement}}</a>';
     tr += '</td>';
     tr += '<td>';

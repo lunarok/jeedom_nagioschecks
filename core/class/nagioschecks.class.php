@@ -66,6 +66,12 @@ class nagioschecks extends eqLogic {
         }
     }
 
+    public static function cronHourly() {
+        foreach (eqLogic::byType('nagioschecks', true) as $nagioschecks) {
+            $nagioschecks->getInformations('60');
+        }
+    }
+
     public function postAjax() {
         foreach ($this->getCmd() as $cmd) {
             $cmd->setTemplate("mobile",'line' );
