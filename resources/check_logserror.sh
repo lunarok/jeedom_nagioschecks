@@ -13,7 +13,7 @@ if [ $(grep "ERROR" -R $DIRECTORY | grep ' . date('Y-m-d', time()) . ' | wc -l )
     EXIT_STRING=$(grep "ERROR" -R $DIRECTORY | grep ' . date('Y-m-d', time()) . ' | tr -d '\n')
     EXIT_CODE=2
 else
-    EXIT_STRING=`Logs Jeedom OK`
+    EXIT_STRING="Backup find"
     EXIT_CODE=0
 fi
 
