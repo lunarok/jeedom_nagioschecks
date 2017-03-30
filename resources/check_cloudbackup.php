@@ -15,7 +15,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Jeedom. If not, see <http://www.gnu.org/licenses/>.
  */
-require_once dirname(__FILE__) . "../../../core/php/core.inc.php";
+require_once dirname(__FILE__) . "/../../../core/php/core.inc.php";
 define('STATE_OK', 0);
 define('STATE_WARNING', 1);
 define('STATE_CRITICAL', 2);
