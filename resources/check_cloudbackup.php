@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 /* This file is part of Jeedom.
  *
@@ -28,3 +29,4 @@ if (strpos($backup[0], date('Y-m-d', time() - 60 * 60 * 24)) !== false || strpos
     echo "KO pas de backup récent sur le market\n";
     exit(STATE_CRITICAL);
 }
+?>
