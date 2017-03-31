@@ -163,6 +163,7 @@ class nagioschecks extends eqLogic {
                             $elt = explode(";", $value);
                             $elts = explode("=", $elt[0]);
                             list($unit,$met) = sscanf($elts[1], "%[A-Z]%[0-9]");
+                            log::add('nagioschecks', 'debug', 'Metric : ' . $elts[1] . ' value ' . $met);
                             $nagiosCmd = nagioschecksCmd::byEqLogicIdAndLogicalId($this->getId(),$cmd->getLogicalId() . '_' . $elts[0]);
                             if (!is_object($nagiosCmd)) {
                                 $nagiosCmd = new nagioschecksCmd();
