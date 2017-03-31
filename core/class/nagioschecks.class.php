@@ -126,6 +126,7 @@ class nagioschecks extends eqLogic {
                         $nagiosCmd->setTemplate("mobile",'line' );
                         $nagiosCmd->setTemplate("dashboard",'line' );
                         $nagiosCmd->setConfiguration("type",'output' );
+                        $nagiosCmd->setConfiguration("cmdlink",$cmd->getLogicalId());
                         $nagiosCmd->save();
                     }
                     $this->checkAndUpdateCmd($cmd->getLogicalId() . '_output', $output[0]);

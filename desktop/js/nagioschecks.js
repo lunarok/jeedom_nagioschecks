@@ -34,6 +34,7 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     if (!isset(_cmd)) {
         var _cmd = {configuration: {}};
     }
+    if (init(_cmd.configuration.type) != 'output' && init(_cmd.configuration.type) != 'metric') {
     var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
     tr += '<td><span class="cmdAttr" data-l1key="id"></span></td>';
     tr += '<td>';
@@ -70,8 +71,68 @@ $("#table_cmd").sortable({axis: "y", cursor: "move", items: ".cmd", placeholder:
     tr += '</tr>';
     $('#table_cmd tbody').append(tr);
     $('#table_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
-    if (isset(_cmd.type)) {
-        $('#table_cmd tbody tr:last .cmdAttr[data-l1key=type]').value(init(_cmd.type));
-    }
-    jeedom.cmd.changeType($('#table_cmd tbody tr:last'), init(_cmd.subType));
+}
+
+if (init(_cmd.configuration.type) == 'output') {
+  var disabled = (init(_cmd.configuration.virtualAction) == '1') ? 'disabled' : '';
+  var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="id"></span>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="name"></span></td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="cmdlink"></span>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="value"></span>';
+  tr += '</td>';
+  tr += '<td>';
+  if (_cmd.subType == 'numeric') {
+    tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span>';
+  }
+  tr += '</td>';
+  tr += '<td>';
+  if (is_numeric(_cmd.id)) {
+    tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
+  }
+  tr += '</td>';
+  tr += '</tr>';
+  $('#output_cmd tbody').append(tr);
+  $('#output_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
+
+}
+
+if (init(_cmd.configuration.type) == 'metric') {
+  var disabled = (init(_cmd.configuration.virtualAction) == '1') ? 'disabled' : '';
+  var tr = '<tr class="cmd" data-cmd_id="' + init(_cmd.id) + '">';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="id"></span>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="name"></span></td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="cmdlink"></span>';
+  tr += '</td>';
+  tr += '<td>';
+  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="value"></span>';
+  tr += '</td>';
+  tr += '<td>';
+  if (_cmd.subType == 'numeric') {
+    tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span>';
+  }
+  tr += '</td>';
+  tr += '<td>';
+  if (is_numeric(_cmd.id)) {
+    tr += '<a class="btn btn-default btn-xs cmdAction expertModeVisible" data-action="configure"><i class="fa fa-cogs"></i></a> ';
+  }
+  tr += '</td>';
+  tr += '</tr>';
+  $('#metric_cmd tbody').append(tr);
+  $('#metric_cmd tbody tr:last').setValues(_cmd, '.cmdAttr');
+
+}
+
+
+
     }
