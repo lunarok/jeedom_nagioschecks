@@ -102,9 +102,6 @@ tr += '</div>';
   tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="cmdlink"></span>';
   tr += '</td>';
   tr += '<td>';
-  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="value"></span>';
-  tr += '</td>';
-  tr += '<td>';
   if (_cmd.subType == 'numeric') {
     tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span>';
   }
@@ -141,9 +138,6 @@ if (init(_cmd.configuration.type) == 'metric') {
 tr += '</div>';
   tr += '<td>';
   tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="cmdlink"></span>';
-  tr += '</td>';
-  tr += '<td>';
-  tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="value"></span>';
   tr += '</td>';
   tr += '<td>';
   if (_cmd.subType == 'numeric') {
