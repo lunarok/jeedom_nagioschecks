@@ -40,17 +40,6 @@ class nagioschecks extends eqLogic {
         exec($cmd);
     }
 
-    public static function cronDaily() {
-        foreach (eqLogic::byType('nagioschecks', true) as $nagioschecks) {
-            foreach ($nagioschecks->getCmd() as $cmd) {
-                $cmd->setConfiguration('alert', 0);
-                $cmd->setConfiguration('alertsend', 0);
-                $cmd->setConfiguration('cmdexec', 0);
-                $cmd->save();
-            }
-        }
-    }
-
     public static function cron5() {
         foreach (eqLogic::byType('nagioschecks', true) as $nagioschecks) {
             $nagioschecks->getInformations('5');
@@ -85,29 +74,18 @@ class nagioschecks extends eqLogic {
         $this->getInformations('all');
     }
 
-    public function alertCmd($titre, $message) {
-        if ($this->getConfiguration('alert','') != '') {
-            $cmd = cmd::byId(str_replace('#','',$this->getConfiguration('alert')));
-            $options['title'] = 'Alerte sur ' . $titre;
-            $options['message'] = $titre . " avec statut " . $message;
-            $cmd->execCmd($options);
-        }
-    }
-
     public function getInformations($cron) {
 
         foreach ($this->getCmd() as $cmd) {
+            if ($cmd->getLogicalId() == '') {
+                $cmd->setLogicalId($cmd->getId());
+                $cmd->save();
+            }
             $tempo = $cmd->getConfiguration('cron');
             if ($tempo == '') {
                 $tempo = '15';
             }
             if ($cmd->getConfiguration('cron') == $cron || 'all' == $cron) {
-                $alert = $cmd->getConfiguration('alert');
-                if ($alert == '') {
-                    $alert = 0;
-                }
-                $notifalert = $cmd->getConfiguration('notifalert','');
-
                 $cline = $cmd->getConfiguration('check');
                 if ($cmd->getConfiguration('ssh') == '1') {
                     $cline = $this->getConfiguration('sshpath') . $cline;
@@ -129,41 +107,38 @@ class nagioschecks extends eqLogic {
                 if ($return_var > 3) {
                     return;
                 }
-                log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' label ' . $output[0] . ' notif ' . $notifalert . ' ' . $alert);
+                log::add('nagioschecks', 'debug', 'Result : ' . $return_var . ' label ' . $output[0]);
                 $value = ($return_var == 0) ? 1 : 0;
-                if ($value == 0 && $notifalert != '') {
-                    if ($alert >= $notifalert) {
-                        $this->alertCmd($cmd->getName(), $output[0]);
-                        $cmd->setConfiguration('alertsend', 1);
-                    } else {
-                        $newalerte = $alert + 1;
-                        $cmd->setConfiguration('alert', $newalerte);
-                        $cmd->setConfiguration('alertsend', 0);
-                    }
-                    if ($cmd->getConfiguration('cmdexec') != 1 && $cmd->getConfiguration('cmdalert','') != '') {
-                        $cmdexec = cmd::byId(str_replace('#','',$cmd->getConfiguration('cmdalert')));
-                        $cmdexec->execCmd();
-                        $cmd->setConfiguration('cmdexec', 1);
-                    }
-                } else {
-                    $cmd->setConfiguration('alert', 0);
-                    $cmd->setConfiguration('alertsend', 0);
-                    $cmd->setConfiguration('cmdexec', 0);
-                }
-                $cmd->setConfiguration('value', $value);
                 $cmd->setConfiguration('code', $return_var);
                 $cmd->setConfiguration('status', $output[0]);
-                $cmd->save();
-                $cmd->event($value);
+                $this->checkAndUpdateCmd($cmd->getLogicalId(), $value);
+                //Traitement valeur texte si demandée
+                if ($cmd->getConfiguration('cmdoutput') == 1) {
+                    $nagiosCmd = nagioschecksCmd::byEqLogicIdAndLogicalId($this->getId(),$cmd->getLogicalId() . '_output');
+                    if (!is_object($nagiosCmd)) {
+                        $nagiosCmd = new nagioschecksCmd();
+                        $nagiosCmd->setName(__($_name, __FILE__));
+                        $nagiosCmd->setEqLogic_id($this->getId());
+                        $nagiosCmd->setEqType('nagioschecks');
+                        $nagiosCmd->setLogicalId($cmd->getLogicalId() . '_output');
+                        $nagiosCmd->setType('info');
+                        $nagiosCmd->setSubType('string');
+                        $nagiosCmd->setTemplate("mobile",'line' );
+                        $nagiosCmd->setTemplate("dashboard",'line' );
+                        $nagiosCmd->setConfiguration("type",'output' );
+                        $nagiosCmd->save();
+                    }
+                    $this->checkAndUpdateCmd($cmd->getLogicalId() . '_output', $output[0]);
+                }
 
 
                 //Traitement métriques
                 if (strpos($output[0], '|') !== false) {
                     $metric = substr($output[0], 0, strpos($output[0], '|'));
                     $cmd->setConfiguration('hasMetric', '1');
-                    $cmd->save();
                     //log::add('nagioschecks', 'debug', $metric);
                 }
+                $cmd->save();
 
             }
         }
