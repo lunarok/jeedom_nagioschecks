@@ -18,23 +18,25 @@ Pour superviser un équipement distant il faut remplir les options de l'équipem
 
 - Chemin des check Nagios sur la cible (en local ils sont intégrés)
 
-Pour tous les équipements si on souhaite avoir des notifications, il faut remplir l'option de notification.
-
 ===== Configuration commandes
 
 Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs ...) qui corresponderont chacune à une commande à lancer (un check_***)
 
 Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn)
 
-Si la case du nombre de check avant notification n'est pas rempli, il n'y a pas de notification pour cette commande. Pour la remplir on saisit le nombre de check en erreur de suite avant notification
-
 On peut sélectionner si la commande est à éxécuter par SSH (dans ce cas, les options de l'équipement doivent être saisies)
 
 On peut également avoir que le check soit éxécuter avec sudo
 
+On peut également sélectionne la création automatique de commandes liées qui donnent le retour d'affichage, le résultat et les métriques
+
 Dans la case commande on saisit le nom du check à lancer
 
 Dans la case des options on saisit les options de ce check (voir les exemples)
+
+===== Action sur résultat ou notification
+
+C'est standard dans le core de Jeedom désormais. Il suffit d'aller dans les options avancées de chaque commande souhaitée et on peut définir des actions (messages ou activations, comme on veut) sur valeur pendant un certain temps
 
 ===== Résultat de commande dans un scénario
 

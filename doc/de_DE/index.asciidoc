@@ -16,8 +16,3 @@ include::faq.asciidoc[]
 '''
 == Fehlersuche
 include::troubleshoting.asciidoc[]
-
-
-'''
-== Änderungsprotokoll
-include::changelog.asciidoc[]
