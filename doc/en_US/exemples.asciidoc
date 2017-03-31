@@ -14,15 +14,27 @@ La commande est : check_log
 
 Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/cron_execution -O /tmp/cron_exec.tmp -q PHP
 
+===== Vérification des logs plugins
+
+La commande est : /check_logserror.sh
+
+Les arguments par exemple : -D /usr/share/nginx/www/jeedom/log
+
+===== Vérification de la sauvegarde Market
+
+La commande est : /check_cloudbackup.php
+
+Les arguments par exemple :
+
 ===== Vérification de la présence d'un fichier de sauvegarde récent
 
-La commande est : check_backup.sh
+La commande est : /check_backup.sh
 
 Les arguments par exemple : -D /usr/share/nginx/www/jeedom/backup
 
 ===== Vérification de l'uptime
 
-La commande est : check_uptime.pl
+La commande est : /check_uptime.pl
 
 Les arguments par exemple : -c 30
 
