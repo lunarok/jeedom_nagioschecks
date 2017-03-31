@@ -112,12 +112,21 @@ class nagioschecks extends eqLogic {
                 $cmd->setConfiguration('code', $return_var);
                 $cmd->setConfiguration('status', $output[0]);
                 $this->checkAndUpdateCmd($cmd->getLogicalId(), $value);
+
+                //Traitement métriques
+                if (strpos($output[0], ' | ') !== false) {
+                    $metric = substr($output[0], 0, strpos($output[0], ' | '));
+                    $cmd->setConfiguration('hasMetric', 1);
+                    log::add('nagioschecks', 'debug', $metric);
+                }
+                $cmd->save();
+
                 //Traitement valeur texte si demandée
                 if ($cmd->getConfiguration('cmdoutput') == 1) {
                     $nagiosCmd = nagioschecksCmd::byEqLogicIdAndLogicalId($this->getId(),$cmd->getLogicalId() . '_output');
                     if (!is_object($nagiosCmd)) {
                         $nagiosCmd = new nagioschecksCmd();
-                        $nagiosCmd->setName(__($_name, __FILE__));
+                        $nagiosCmd->setName($cmd->getName().'_output');
                         $nagiosCmd->setEqLogic_id($this->getId());
                         $nagiosCmd->setEqType('nagioschecks');
                         $nagiosCmd->setLogicalId($cmd->getLogicalId() . '_output');
@@ -130,17 +139,24 @@ class nagioschecks extends eqLogic {
                         $nagiosCmd->save();
                     }
                     $this->checkAndUpdateCmd($cmd->getLogicalId() . '_output', $output[0]);
+                    $nagiosCmd = nagioschecksCmd::byEqLogicIdAndLogicalId($this->getId(),$cmd->getLogicalId() . '_status');
+                    if (!is_object($nagiosCmd)) {
+                        $nagiosCmd = new nagioschecksCmd();
+                        $nagiosCmd->setName($cmd->getName().'_status');
+                        $nagiosCmd->setEqLogic_id($this->getId());
+                        $nagiosCmd->setEqType('nagioschecks');
+                        $nagiosCmd->setLogicalId($cmd->getLogicalId() . '_status');
+                        $nagiosCmd->setType('info');
+                        $nagiosCmd->setSubType('numeric');
+                        $nagiosCmd->setConfiguration("type",'output' );
+                        $nagiosCmd->setConfiguration("cmdlink",$cmd->getLogicalId());
+                        $nagiosCmd->save();
+                    }
+                    $this->checkAndUpdateCmd($cmd->getLogicalId() . '_status', $return_var);
+                    if($cmd->getConfiguration('hasMetric') == 1) {
+
+                    }
                 }
-
-
-                //Traitement métriques
-                if (strpos($output[0], '|') !== false) {
-                    $metric = substr($output[0], 0, strpos($output[0], '|'));
-                    $cmd->setConfiguration('hasMetric', '1');
-                    //log::add('nagioschecks', 'debug', $metric);
-                }
-                $cmd->save();
-
             }
         }
         return ;
