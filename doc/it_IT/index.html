@@ -432,11 +432,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_faq">4. FAQ</a></li>
 <li><a href="#_troubleshoting">5. Troubleshoting</a></li>
-<li><a href="#_changelog">6. Changelog</a>
-<ul class="sectlevel3">
-<li><a href="#_version_1">6.1. Version 1</a></li>
-</ul>
-</li>
 </ul>
 </div>
 </div>
@@ -494,9 +489,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Pour tous les équipements si on souhaite avoir des notifications, il faut remplir l&#8217;option de notification.</p>
-</div>
 </div>
 <div class="sect4">
 <h5 id="_configuration_commandes">Configuration commandes</h5>
@@ -507,19 +499,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn)</p>
 </div>
 <div class="paragraph">
-<p>Si la case du nombre de check avant notification n&#8217;est pas rempli, il n&#8217;y a pas de notification pour cette commande. Pour la remplir on saisit le nombre de check en erreur de suite avant notification</p>
-</div>
-<div class="paragraph">
 <p>On peut sélectionner si la commande est à éxécuter par SSH (dans ce cas, les options de l&#8217;équipement doivent être saisies)</p>
 </div>
 <div class="paragraph">
 <p>On peut également avoir que le check soit éxécuter avec sudo</p>
 </div>
 <div class="paragraph">
+<p>On peut également sélectionne la création automatique de commandes liées qui donnent le retour d&#8217;affichage, le résultat et les métriques</p>
+</div>
+<div class="paragraph">
 <p>Dans la case commande on saisit le nom du check à lancer</p>
 </div>
 <div class="paragraph">
 <p>Dans la case des options on saisit les options de ce check (voir les exemples)</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_action_sur_résultat_ou_notification">Action sur résultat ou notification</h5>
+<div class="paragraph">
+<p>C&#8217;est standard dans le core de Jeedom désormais. Il suffit d&#8217;aller dans les options avancées de chaque commande souhaitée et on peut définir des actions (messages ou activations, comme on veut) sur valeur pendant un certain temps</p>
 </div>
 </div>
 <div class="sect4">
@@ -749,18 +747,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Il faut bien créer un équipement et remplir les informations de la commande qu&#8217;on souhaite utiliser.</p>
 </div>
-</div>
-</div>
-<hr>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_changelog">6. Changelog</h2>
-<div class="sectionbody">
-<div class="sect3">
-<h4 id="_version_1">6.1. Version 1</h4>
-<div class="paragraph">
-<p>Création du plugin</p>
 </div>
 </div>
 </div>
