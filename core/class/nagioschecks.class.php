@@ -162,8 +162,13 @@ class nagioschecks extends eqLogic {
                         foreach ($result as $value) {
                             $elt = explode(";", $value);
                             $elts = explode("=", $elt[0]);
-                            list($unit,$met) = sscanf($elts[1], "%[A-Z]%[0-9]");
-                            log::add('nagioschecks', 'debug', 'Metric : ' . $elts[1] . ' value ' . $met);
+                            if (is_numeric($elts[1];)) {
+                                $unit = '';
+                                $met = $elts[1];
+                            } else {
+                                list($unit,$met) = sscanf($elts[1], "%[A-Z]%[0-9]");
+                            }
+                            log::add('nagioschecks', 'debug', 'Metric : ' . $elts[0] . ' value ' . $met);
                             $nagiosCmd = nagioschecksCmd::byEqLogicIdAndLogicalId($this->getId(),$cmd->getLogicalId() . '_' . $elts[0]);
                             if (!is_object($nagiosCmd)) {
                                 $nagiosCmd = new nagioschecksCmd();
@@ -173,7 +178,9 @@ class nagioschecks extends eqLogic {
                                 $nagiosCmd->setLogicalId($cmd->getLogicalId() . '_' . $elts[0]);
                                 $nagiosCmd->setType('info');
                                 $nagiosCmd->setSubType('numeric');
-                                $nagiosCmd->setUnite($unit);
+                                if ($unit != '') {
+                                    $nagiosCmd->setUnite($unit);
+                                }
                                 $nagiosCmd->setConfiguration("type",'metric' );
                                 $nagiosCmd->setConfiguration("cmdlink",$cmd->getLogicalId());
                                 $nagiosCmd->save();
