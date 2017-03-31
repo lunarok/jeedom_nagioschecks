@@ -162,7 +162,7 @@ class nagioschecks extends eqLogic {
                         foreach ($result as $value) {
                             $elt = explode(";", $value);
                             $elts = explode("=", $elt[0]);
-                            if (is_numeric($elts[1];)) {
+                            if (is_numeric($elts[1])) {
                                 $unit = '';
                                 $met = $elts[1];
                             } else {
