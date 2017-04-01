@@ -117,9 +117,9 @@ class nagioschecks extends eqLogic {
                 if (strpos($output[0], '|') !== false) {
                     $result = explode("|", $output[0]);
                     $output = trim($result[0]);
-                    $metric = trim($result[1]);
+                    $metric = trim(str_replace(',', '.', $result[1]));
                     $cmd->setConfiguration('hasMetric', 1);
-                    log::add('nagioschecks', 'debug', $metric);
+                    log::add('nagioschecks', 'debug', 'Raw Metric : ' . $metric);
                 } else {
                     $output = trim($output[0]);
                 }
@@ -165,10 +165,12 @@ class nagioschecks extends eqLogic {
                             if (is_numeric($elts[1])) {
                                 $unit = '';
                                 $met = $elts[1];
+                                log::add('nagioschecks', 'debug', 'Metric : ' . $elts[0] . ' value ' . $met . ' sans unite');
                             } else {
                                 list($unit,$met) = sscanf($elts[1], "%[A-Z]%[0-9]");
+                                log::add('nagioschecks', 'debug', 'Metric : ' . $elts[0] . ' value ' . $met . ' ' . $unit);
                             }
-                            log::add('nagioschecks', 'debug', 'Metric : ' . $elts[0] . ' value ' . $met);
+
                             $nagiosCmd = nagioschecksCmd::byEqLogicIdAndLogicalId($this->getId(),$cmd->getLogicalId() . '_' . $elts[0]);
                             if (!is_object($nagiosCmd)) {
                                 $nagiosCmd = new nagioschecksCmd();
