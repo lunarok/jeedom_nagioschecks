@@ -142,7 +142,7 @@ class nagioschecks extends eqLogic {
                         $nagiosCmd->setConfiguration("cmdlink",$cmd->getLogicalId());
                         $nagiosCmd->save();
                     }
-                    $this->checkAndUpdateCmd($cmd->getLogicalId() . '_output', $output[0]);
+                    $this->checkAndUpdateCmd($cmd->getLogicalId() . '_output', $output);
                     $nagiosCmd = nagioschecksCmd::byEqLogicIdAndLogicalId($this->getId(),$cmd->getLogicalId() . '_status');
                     if (!is_object($nagiosCmd)) {
                         $nagiosCmd = new nagioschecksCmd();
@@ -167,7 +167,10 @@ class nagioschecks extends eqLogic {
                                 $met = $elts[1];
                                 log::add('nagioschecks', 'debug', 'Metric : ' . $elts[0] . ' value ' . $met . ' sans unite');
                             } else {
-                                list($unit,$met) = sscanf($elts[1], "%[A-Z]%[0-9]");
+                                $split = preg_split( '/([A-Za-z]+)/', $elts[1], -1, PREG_SPLIT_DELIM_CAPTURE | PREG_SPLIT_NO_EMPTY);
+                                $met = $split[0];
+                                $unit = $split[1];
+                                //list($unit,$met) = sscanf($elts[1], "%[A-Z]%[0-9]");
                                 log::add('nagioschecks', 'debug', 'Metric : ' . $elts[0] . ' value ' . $met . ' ' . $unit);
                             }
 
@@ -187,7 +190,7 @@ class nagioschecks extends eqLogic {
                                 $nagiosCmd->setConfiguration("cmdlink",$cmd->getLogicalId());
                                 $nagiosCmd->save();
                             }
-                            $this->checkAndUpdateCmd($cmd->getLogicalId() . '_status', $met);
+                            $this->checkAndUpdateCmd($cmd->getLogicalId() . '_' . $elts[0], $met);
                         }
                     }
                 }
