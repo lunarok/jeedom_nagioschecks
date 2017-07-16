@@ -157,7 +157,7 @@ class nagioschecks extends eqLogic {
                         $nagiosCmd->save();
                     }
                     $this->checkAndUpdateCmd($cmd->getLogicalId() . '_status', $return_var);
-                    if($cmd->getConfiguration('hasMetric') == 1) {
+                    if($cmd->getConfiguration('hasMetric') == 1 && isset($metric)) {
                         $result = explode(" ", $metric);
                         foreach ($result as $value) {
                             $elt = explode(";", $value);
