@@ -140,9 +140,11 @@ tr += '</div>';
   tr += '<span class="cmdAttr" data-l1key="configuration" data-l2key="cmdlink"></span>';
   tr += '</td>';
   tr += '<td>';
-  if (_cmd.subType == 'numeric') {
-    tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span>';
-  }
+ if (_cmd.subType == 'numeric') {
+  tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isHistorized" checked/>{{Historiser}}</label></span>';
+            tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="minValue" placeholder="{{Min}}" title="{{Min}}" style="width : 40px;"> ';
+            tr += '<input class="tooltips cmdAttr form-control input-sm" data-l1key="configuration" data-l2key="maxValue" placeholder="{{Max}}" title="{{Max}}" style="width : 40px;">';
+ }
   tr += '<span><label class="checkbox-inline"><input type="checkbox" class="cmdAttr checkbox-inline" data-l1key="isVisible" checked/>{{Afficher}}</label></span> ';
   tr += '</td>';
   tr += '<td>';
