@@ -2,7 +2,7 @@
 
 Das Plugin enthält keine allgemeine Konfiguration.
 
-===== Configuration équipement
+===== Geräte Konfiguration
 
 Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...)
 
