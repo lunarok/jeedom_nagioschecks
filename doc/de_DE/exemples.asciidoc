@@ -22,7 +22,7 @@ Les arguments par exemple : -D /usr/share/nginx/www/jeedom/log
 
 ===== Vérification de la sauvegarde Market
 
-La commande est : /check_cloudbackup.php
+Der Befehl lautet : /check_cloudbackup.php
 
 Les arguments par exemple :
 
@@ -54,7 +54,7 @@ Les arguments par exemple : -w 5,5,5 -c 10,10,10
 
 Un des checks à disposition est check_procs. Un usage basique est de lui donner le nombre de process qui doivent être existant et le label à chercher.
 
-Voici quelques exemples de configuration :
+Hier sind einige Konfigurationsbeispiele :
 
 image::../images/check_procs.png[Conf procs]
 
