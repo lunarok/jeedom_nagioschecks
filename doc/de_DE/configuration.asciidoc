@@ -8,7 +8,7 @@ Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveu
 
 Pour superviser un équipement distant il faut remplir les options de l'équipement suivantes (uniquement les distants) :
 
-- Adresse IP
+- IP Adresse
 
 - Port SSH
 
@@ -18,7 +18,7 @@ Pour superviser un équipement distant il faut remplir les options de l'équipem
 
 - Chemin des check Nagios sur la cible (en local ils sont intégrés)
 
-===== Configuration commandes
+===== Befehls Konfiguration
 
 Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs ...) qui corresponderont chacune à une commande à lancer (un check_***)
 

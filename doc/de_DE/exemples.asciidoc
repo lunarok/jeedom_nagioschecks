@@ -12,7 +12,7 @@ Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/nginx-error.log -
 
 La commande est : check_log
 
-Les arguments par exemple : -F /usr/share/nginx/www/jeedom/log/cron_execution -O /tmp/cron_exec.tmp -q PHP
+Die Argumente, zum Beispiel : -F /usr/share/nginx/www/jeedom/log/cron_execution -O /tmp/cron_exec.tmp -q PHP
 
 ===== Vérification des logs plugins
 
