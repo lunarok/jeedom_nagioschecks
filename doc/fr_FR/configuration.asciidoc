@@ -4,7 +4,7 @@ Le plugin ne comporte pas de configuration générale.
 
 ===== Configuration équipement
 
-Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...)
+Il faut ajouter un équipement par "unité" à superviser (comprendre pi, serveur ...).
 
 Pour superviser un équipement distant il faut remplir les options de l'équipement suivantes (uniquement les distants) :
 
@@ -14,29 +14,29 @@ Pour superviser un équipement distant il faut remplir les options de l'équipem
 
 - Identifiant
 
-- Emplacement de la clef (uniquement les connexions par clef SSH sont supportées)
+- Emplacement de la clef privée (sont supportées uniquement les connexions par clef SSH)
 
-- Chemin des check Nagios sur la cible (en local ils sont intégrés)
+- Chemin des checks Nagios sur la cible (en local ils sont intégrés)
 
 ===== Configuration commandes
 
-Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs ...) qui corresponderont chacune à une commande à lancer (un check_***)
+Ensuite on ajoute une commande par élément à supervisier (état RAID, mysql, logs ...) qui correspondra chacune à une commande à lancer (un check_***).
 
-Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn)
+Chaque commande permet de paramétrer sa fréquence (5mn, 15mn ou 30mn).
 
-On peut sélectionner si la commande est à éxécuter par SSH (dans ce cas, les options de l'équipement doivent être saisies)
+On peut sélectionner si la commande est à éxécuter par SSH (dans ce cas, les options de l'équipement doivent être saisies).
 
-On peut également avoir que le check soit éxécuter avec sudo
+On peut également exécuter le check avec sudo.
 
-On peut également sélectionne la création automatique de commandes liées qui donnent le retour d'affichage, le résultat et les métriques
+On peut également sélectionner la création automatique de commandes liées qui donnent le retour d'affichage, le résultat et les métriques.
 
-Dans la case commande on saisit le nom du check à lancer
+Dans la case "Check" on saisit le nom du check à lancer.
 
-Dans la case des options on saisit les options de ce check (voir les exemples)
+Dans la case des "Options" on saisit les options de ce check (voir les exemples).
 
 ===== Action sur résultat ou notification
 
-C'est standard dans le core de Jeedom désormais. Il suffit d'aller dans les options avancées de chaque commande souhaitée et on peut définir des actions (messages ou activations, comme on veut) sur valeur pendant un certain temps
+C'est standard dans le core de Jeedom désormais. Il suffit d'aller dans les options avancées de chaque commande souhaitée et on peut définir des actions (messages ou activations, comme on veut) sur valeur pendant un certain temps.
 
 ===== Résultat de commande dans un scénario
 
@@ -44,6 +44,6 @@ Il est possible de récupérer la sortie Label du check dans un scénario en uti
 
 $status = $cmd->getConfiguration('status');
 
-Par exemple comme sur ce screenshot.
+Par exemple comme sur ce screenshot:
 
 image::../images/nagioschecks_screenshot2.png[Exemple execCmd avec options]
