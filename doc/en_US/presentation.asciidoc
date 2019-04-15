@@ -1,7 +1,0 @@
-==== Check Nagios, run Nagios checks in Jeedom
-
-This plugin allows to get the result of Nagios checks. Nagios is a monitoring software with scripts that cover a very wide range of uses.
-
-Scripts can be executed locally or via SSH (via check_by_ssh)
-
-On peut par exemple récupérer l'état de disques durs, d'un RAID, de services ...

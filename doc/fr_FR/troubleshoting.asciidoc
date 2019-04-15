@@ -1,5 +1,0 @@
-[panel,danger]
-.Je n'ai pas d'informations qui remontent
---
-Il faut bien créer un équipement et remplir les informations de la commande qu'on souhaite utiliser.
---
