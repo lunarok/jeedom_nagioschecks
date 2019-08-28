@@ -23,7 +23,7 @@ class nagioschecks extends eqLogic {
     public static function dependancy_info() {
         $return = array();
         $return['log'] = 'nagios_plugins';
-        $cmd = "dpkg -l | grep nagios-plugins";
+        $cmd = "dpkg -l | grep monitoring-plugins";
         exec($cmd, $output, $return_var);
         if ($output[0] != "") {
             $return['state'] = 'ok';
@@ -34,7 +34,7 @@ class nagioschecks extends eqLogic {
     }
 
     public static function dependancy_install() {
-        $cmd = 'sudo apt-get -y install nagios-plugins >> ' . log::getPathToLog('nagios_plugins') . ' 2>&1 &';
+        $cmd = 'sudo apt-get -y install monitoring-plugins >> ' . log::getPathToLog('nagios_plugins') . ' 2>&1 &';
         exec($cmd);
         $cmd = 'sudo chmod +x ' . dirname(__FILE__) . '/../../resources/*';
         exec($cmd);
