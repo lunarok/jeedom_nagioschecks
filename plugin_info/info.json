@@ -4,7 +4,7 @@
 	"description" : "Ce plugin permet d'éxécuter des check Nagios. Tous les check disponibles localement sont utilisable et il est également possible d'utiliser le check_by_ssh pour éxécuter des actions distantes.",
 	"licence" : "AGPL",
 	"author" : "lunarok",
-	"require" : "3.3.24",
+	"require" : "4.2",
 	"category" : "monitoring",
 	"language" : ["fr_FR","en_US"],
 	"compatibility" : ["miniplus","smart","rpi","docker","diy","mobile","v4"],
